@@ -3,11 +3,12 @@
 EW-Shopp aims to support e-commerce, retail and marketing industries in improving their efficiency and competitiveness through providing the ability to perform predictive and prescriptive analytics over integrated and enriched large datasets through the use of open and flexible solutions. 
 This document is intended to be the first step towards the construction of the EW-Shopp ecosystem, a platform that seeks to significantly reduce integration time and to improve the quality of analytics by providing cutting-edge tools and access to data as a service, with particular reference to weather and event information.  
 
-We propose a reference architecture specifically designed to handle Big Data workloads. 
+We propose a reference architecture specially designed to handle Big Data workloads. 
 In order for this to be possible, we have carried out a thorough requirement gathering phase that takes into account the best practices in creating Big Data architectures and the expectations of the partners involved in business cases. As a result, we were able not only to define the platform architecture, but also to set up a unified common language that, we believe, will have clear benefits in the next stages of the project.
 In addition, we propose an initial reference implementation by selecting one or more solutions for each reference component. In particular, embracing the lean development approach, we detail only the core of the platform, namely the tools on which a strong convergence exists among the consortium members (the minimum viable product or MVP). The rest of the platform is constituted by suggestion of tools and/or technologies that at this moment seem to be good candidates but that may be replaced as the project develops. 
 
-For some years now we have been witnessing the flourishing and reinforcement of Big Data methodologies in academia and especially in industry. This success can in part be explained by the promise of Big Data supporters to be able to define and deliver more accurate and efficient data-driven decision-making processes. This is not the only asset, but it is what we are most interested in highlighting within the EW-Shopp project. 
+For some years now we have been witnessing the flourishing and reinforcement of Big Data methodologies in academia and especially in industry. This success can in part be explained by the promise of Big Data supporters to define and deliver more accurate and efficient data-driven decision-making processes.
+This is not the only asset, but it is what we are most interested in highlighting within the EW-Shopp project. 
 The term "Data Analytics" is too often used to define a generic data driven decision process and therefore covers heterogeneous activities such as cleaning, linking, enrichment, application of analytic models up to business intelligence and visualization. In this document, we propose to design the EW-Shopp platform from its components and their relationships. We present a reference architecture obtained from a rigorous process of requirements elicitation that took into account both literature and best practices as well as the needs expressed by involved stakeholders. 
 A considerable amount of work has already been done within the consortium (presented in document D4.1 [1]) to outline the strategy for the implementation of business case pilots. In that particular document, not only the functional requirements associated with business cases (the implementation and reporting of which in marketed services is one of the core aspects of the project) have been collected and refined, but also the development guidelines based on lean methodology [2] have been defined. In particular, the build-measure-learn feedback loop is also presented. In a nutshell, the methodology envisions for each pilot a starting phase with Minimum Viable Product (MVP) meant to reduce the time-to-market. The MVP is going to be enriched as the project progresses and the vision matures. Pilots are therefore seen as playgrounds for experimenting approaches and technologies that eventually will be included in the final marketed services. 
 Three stages of the development are foreseen:
@@ -27,58 +28,9 @@ With the work the consortium has done on component design, the processes and out
 This work is structured as follows. In Chapter 2 we present the reference architectures for Big Data as well as the main solutions for data wrangling, data analytics, business intelligence and reporting. The requirements that have guided the definition of our reference architecture are presented and discussed in Chapter 3. The EW-Shopp reference platform is detailed in Chapter 4, where both the reference data flow and control flow are also presented. Once the reference architecture has been defined, we have decided to present a possible implementation (in embryonic form) of the EW-Shopp platform in Chapter 5. Finally, Chapter 6 concludes the document. 
 
 
-\section{Approach}
-The EW-Shopp system aims to support e-commerce, retail and marketing industries in improving their efficiency and competitiveness through providing the ability to perform predictive and prescriptive analytics over integrated and enriched large data sets using open and flexible solutions. In addition, these tools must provide a responsive graphical user interface to guide the user in designing data transformations. These observations together with the confidentiality requirement lead us to believe that the data transformation design phase has to be carried out on a small and possibly anonymized subset of the initial data. For this reason, we have introduced into the platform a specialized component, named Sampler, whose task is to properly generate this data subset. 
-
-The idea of reducing the size of the data set to be able to handle it more easily is not new \cite{XXX}[13][14][15][16][17]
-and is commonly referred to as Dimension Reduction or Big Data Reduction. The approach is rather simple in its general lines; it consists in reducing the size of the data set by identifying a possible compact representation of it. In this way, the data transformation and data analytics operations in EW-Shopp can be designed and tested on a smaller set than the original data, which should ensure greater responsiveness and efficiency for the applications involved without negatively affecting accuracy.
-\textbf{Figure 6} graphically illustrates how the reduction approach is implemented within the EW-Shopp architecture. First of all, we point out that only the Data Wrangler and the Data Analyzer are affected by this methodology as the data reporter will visualize and inspect data of small dimensions which were obtained as a result of the Data Analyzer results. 
-As far as the Data Wrangler and Data Analyzer are concerned, the operations associated with the Dimension Reduction Approach are the following:
-
-\begin{enumerate}
-    \item Creating a reduced data set (called Sample in the diagram). Such sample may depend on the particular operation to be carried out (preparation or analytics)
-    \item 	The user operates the application working on the sample. In the particular case of the Data Wrangler, it also receives in input a collection of recommendations to guide the user in the process of table annotation.
-    \item The application generates a machine-readable description of the user's operations
-    \item The model (of transformation or analytics) is executed on the initial data set by the Big Data runtime component.
-\end{enumerate}
-
-It is important to note that this choice does not reduce the applicability and generality of the EW-Shopp solution as, where possible and desired by the user (e. g. in cases where the data to be transformed is manageable and does not require anonymization), the sampling component can be excluded. In this mode, the user is free to work directly against the original data set. 
-
-\section{Reference Architecture}
-
-\subsection{Data Wrangler}
-
-\subsection{Big Data Backend}
-
-
-\section{Early evaluation}
-
-- jot data
-- some information about timing
-
-\section{Conclusions}
-The EW-Shopp ecosystem aims to support e-commerce, Retail and Marketing industries in improving their efficiency and competitiveness through providing the ability to perform predictive and prescriptive analytics over integrated and enriched large datasets using open and flexible solutions. 
-With this document, we have tried to pursue several objectives at once. Mainly, we have outlined a reference architecture specifically designed to handle large amounts of data. This architecture is based on the principle of the dataset Dimension Reduction to work. We have tried to explain to the reader how, by appropriately reducing the size of the dataset, it is possible to design a data enrichment process that is both precise and manageable. The same principle underpins the process of defining analytics algorithms. The proposed architecture natively supports this approach but can also work directly on business data as long as it is not too large.
-Our second objective was to raise awareness among consortium members about the inherent difficulties associated with the project and the possible solutions that could be adopted. We have therefore attempted to create a unified common language that, we believe, will have clear benefits in the next stages of the project.
-Finally, we have tried to propose an initial implementation of the architecture by identifying one or more tools for each component of the reference architecture. In particular, at this stage we have embraced the lean development approach already introduced in Deliverable D4.1. In our case this has meant that only the centerpiece of the platform, namely the tools already identified and on which an agreement exists among the consortium members, is presented as stable and detailed. The rest of the platform, on the other hand, is constituted by tools and/or technologies that at this moment seem to be good candidates but that can be replaced as the project develops. In addition, business cases can evolve independently and have individual requirements. This could lead to the adoption of different tools to cover the same functionalities. Nevertheless, we believe that the reference architecture and its implementation, however incomplete it may be, will be able to guide the development process that will take place in the coming months.
-
-%\end{document}  % This is where a 'short' article might terminate
 
 
 
 
 
-\begin{acks}
-  The authors would like to thank Dr. Yuhua Li for providing the
-  MATLAB code of the \textit{BEPS} method.
 
-  The authors would also like to thank the anonymous referees for
-  their valuable comments and helpful suggestions. The work is
-  supported by the \grantsponsor{GS501100001809}{National Natural
-    Science Foundation of
-    China}{http://dx.doi.org/10.13039/501100001809} under Grant
-  No.:~\grantnum{GS501100001809}{61273304}
-  and~\grantnum[http://www.nnsf.cn/youngscientists]{GS501100001809}{Young
-    Scientists' Support Program}.
-
-\end{acks}
