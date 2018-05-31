@@ -1,5 +1,5 @@
 %%%% Proceedings format for most of ACM conferences (with the exceptions listed below) and all ICPS volumes.
-\documentclass[sigconf]{acmart}
+\documentclass[sigconf, final]{acmart}
 %%%% As of March 2017, [siggraph] is no longer used. Please use sigconf (above) for SIGGRAPH conferences.
 
 %%%% Proceedings format for SIGPLAN conferences 
@@ -13,7 +13,7 @@
 
 
 \usepackage{booktabs} % For formal tables
-
+\usepackage{graphicx}
 
 % Copyright
 %\setcopyright{none}
@@ -50,7 +50,7 @@
 
 
 \begin{document}
-\title{A Big Data platform for data transformation and enrichment}
+\title{A platform for massive data transformation and linking}
 %\titlenote{Produces the permission block, and copyright information}
 \subtitle{The EW-Shopp approach}
 %\subtitlenote{The full version of the author's guide is available \texttt{acmart.pdf} document}
@@ -95,9 +95,8 @@
 
 
 \begin{abstract}
-This paper provides a sample of a \LaTeX\ document which conforms,
-somewhat loosely, to the formatting guidelines for
-ACM SIG Proceedings.\footnote{This is an abstract footnote}
+This paper aims at presenting the subsystem of a comprehensive platform dedicated to the data transformation, linking and extension of massive data sets. The main requirements that have led the design and development of the platform are also detailed and discussed as well as the devised approach as direct consequence of the requirement elicitation and discussion phase. In particular,  both design time and run time aspects of the data transformation process are supported and this can be seen reflected in the architecture. 
+Some initial tests have been carried out on data sets of a TB featuring promising performance. 
 \end{abstract}
 
 %

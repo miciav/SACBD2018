@@ -1,16 +1,22 @@
-\section{Approach}
-The EW-Shopp system aims to support e-commerce, retail and marketing industries in improving their efficiency and competitiveness through providing the ability to perform predictive and prescriptive analytics over integrated and enriched large data sets using open and flexible solutions. In addition, these tools must provide a responsive graphical user interface to guide the user in designing data transformations. These observations together with the confidentiality requirement lead us to believe that the data transformation design phase has to be carried out on a small and possibly anonymized subset of the initial data. For this reason, we have introduced into the platform a specialized component, named Sampler, whose task is to properly generate this data subset. 
+\section{Approach}\label{sec:approach}
+We propose a reference architecture specially designed to handle Big Data workloads. 
+In order for this to be possible, we have carried out a thorough requirement gathering phase that takes into account the best practices in creating Big Data architectures and the expectations of the business partners involved in the project. 
+%As a result, we were able not only to define the platform architecture, but also to set up a unified common language that, we believe, will have clear benefits in the next stages of the project.
+
+
+The EW-Shopp system aims to support e-commerce, retail and marketing industries in improving their efficiency and competitiveness through providing the ability to perform predictive and prescriptive analytics over integrated and enriched large data sets using open and flexible solutions. In addition, these tools must provide a responsive graphical user interface to guide the user in designing data transformations. 
+These observations together with the confidentiality requirement lead us to believe that the data transformation design phase has to be carried out on a small and possibly anonymized subset of the initial data. For this reason, we have introduced into the platform a specialized component, named Sampler, whose task is to properly generate this data subset. 
 
 The idea of reducing the size of the data set to be able to handle it more easily is not new \cite{XXX}[13][14][15][16][17]
-and is commonly referred to as Dimension Reduction or Big Data Reduction. The approach is rather simple in its general lines; it consists in reducing the size of the data set by identifying a possible compact representation of it. In this way, the data transformation and data analytics operations in EW-Shopp can be designed and tested on a smaller set than the original data, which should ensure greater responsiveness and efficiency for the applications involved without negatively affecting accuracy.
-\textbf{Figure 6} graphically illustrates how the reduction approach is implemented within the EW-Shopp architecture. First of all, we point out that only the Data Wrangler and the Data Analyzer are affected by this methodology as the data reporter will visualize and inspect data of small dimensions which were obtained as a result of the Data Analyzer results. 
+and is commonly referred to as Dimension Reduction or Big Data Reduction. The approach is rather simple in its general lines; it consists in reducing the size of the data set by identifying a possible compact representation of it. In this way, the data transformation and data analytics operations can be designed and tested on a smaller set than the original data, which should ensure greater responsiveness and efficiency for the applications involved without negatively affecting accuracy.
+\textbf{Figure 6} graphically illustrates how the reduction approach is implemented within the architecture. First of all, we point out that only the Data Wrangler and the Data Analyzer are affected by this methodology as the data reporter will visualize and inspect data of small dimensions which were obtained as a result of the Data Analyzer results. 
 As far as the Data Wrangler and Data Analyzer are concerned, the operations associated with the Dimension Reduction Approach are the following:
 
 \begin{enumerate}
     \item Creating a reduced data set (called Sample in the diagram). Such sample may depend on the particular operation to be carried out (preparation or analytics)
     \item 	The user operates the application working on the sample. In the particular case of the Data Wrangler, it also receives in input a collection of recommendations to guide the user in the process of table annotation.
     \item The application generates a machine-readable description of the user's operations
-    \item The model (of transformation or analytics) is executed on the initial data set by the Big Data runtime component.
+    \item The model (of transformation or analytics) is executed on the initial data set by the Big Data run time component.
 \end{enumerate}
 
-It is important to note that this choice does not reduce the applicability and generality of the EW-Shopp solution as, where possible and desired by the user (e. g. in cases where the data to be transformed is manageable and does not require anonymization), the sampling component can be excluded. In this mode, the user is free to work directly against the original data set. 
+It is important to note that this choice does not reduce the applicability and generality of the presented solution as, where it is possible (e. g. in cases where the data to be transformed is manageable and does not require anonymization), the sampling component can be excluded. In this mode, the user is free to work directly against the original data set. 
