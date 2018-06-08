@@ -33,10 +33,9 @@
 \acmISBN{123-4567-24-567/08/06}
 
 %Conference
-\acmConference[WOODSTOCK'97]{ACM Woodstock conference}{July 1997}{El
-  Paso, Texas USA}
-\acmYear{1997}
-\copyrightyear{2016}
+\acmConference[SACBD]{1st Software Architecture Challenges in Big Data}{September 2018}{Madrid, Spain}
+\acmYear{2018}
+\copyrightyear{2018}
 
 
 \acmArticle{4}
@@ -50,53 +49,56 @@
 
 
 \begin{document}
-\title{A platform for massive data transformation and linking}
+\title{Doing Data Wrangling at Scale}
+%Big Data Processing, Integration and Enrichment using Container Orchestration
 %\titlenote{Produces the permission block, and copyright information}
-\subtitle{The EW-Shopp approach}
+\subtitle{The experience of EW-Shopp}
 %\subtitlenote{The full version of the author's guide is available \texttt{acmart.pdf} document}
 
 
-\author{Ben Trovato}
+\author{Nikolay Nikolov}
 %\authornote{Dr.~Trovato insisted his name be first.}
-\orcid{1234-5678-9012}
+%\orcid{1234-5678-9012}
 \affiliation{%
-  \institution{Institute for Clarity in Documentation}
-  \streetaddress{P.O. Box 1212}
-  \city{Dublin}
-  \state{Ohio}
-  \postcode{43017-6221}
+  \institution{SINTEF}
+  \streetaddress{Forskningsveien 1}
+  \city{Oslo}
+  \country{Norway}
+  \postcode{0182}
 }
-\email{trovato@corporation.com}
+\email{nikolay.nikolov@sintef.no}
 
 \author{Michele Ciavotta}
 %\authornote{The secretary disavows any knowledge of this author's actions.}
 \affiliation{%
-  \institution{Institute for Clarity in Documentation}
-  \streetaddress{P.O. Box 1212}
-  \city{Dublin}
-  \state{Ohio}
-  \postcode{43017-6221}
+  \institution{University of Milan-Bicocca}
+  \streetaddress{DISCo, Viale Sarca 336/14}
+  \city{Milan}
+  \country{Italy}
+  \postcode{20126}
 }
-\email{webmaster@marysville-ohio.com}
+\email{michele.ciavotta@unimib.it}
 
-\author{Lars Th{\o}rv{\"a}ld}
+\author{Flavio De Paoli}
 %\authornote{This author is the one who did all the really hard work.}
 \affiliation{%
-  \institution{The Th{\o}rv{\"a}ld Group}
-  \streetaddress{1 Th{\o}rv{\"a}ld Circle}
-  \city{Hekla}
-  \country{Iceland}}
-\email{larst@affiliation.org}
+  \institution{University of Milan-Bicocca}
+  \streetaddress{DISCo, Viale Sarca 336/14}
+  \city{Milan}
+  \country{Italy}
+  \postcode{20126}
+  }
+\email{flavio.depaoli@unimib.it}
 
 
 
 % The default list of authors is too long for headers.
-\renewcommand{\shortauthors}{B. Trovato et al.}
+\renewcommand{\shortauthors}{N. Nikolov et al.}
 
 
 \begin{abstract}
-This paper aims at presenting the subsystem of a comprehensive platform dedicated to the data transformation, linking and extension of massive data sets. The main requirements that have led the design and development of the platform are also detailed and discussed as well as the devised approach as direct consequence of the requirement elicitation and discussion phase. In particular,  both design time and run time aspects of the data transformation process are supported and this can be seen reflected in the architecture. 
-Some initial tests have been carried out on data sets of a TB featuring promising performance. 
+This paper presents a subsystem of a comprehensive platform dedicated to data transformation, linking and extension of large data sets. Furthermore, we detail and discuss both the main requirements that have led to the design and development of the platform, and the devised approach, which is a direct outcome of the requirement elicitation and discussion phase. In particular, the platform supports both design time and run time aspects of the data transformation process, which is reflected in the architecture. 
+Some initial tests have been carried out on data sets of \textasciitilde 1TB featuring promising performance. 
 \end{abstract}
 
 %
@@ -106,36 +108,48 @@ Some initial tests have been carried out on data sets of a TB featuring promisin
 %
 \begin{CCSXML}
 <ccs2012>
- <concept>
-  <concept_id>10010520.10010553.10010562</concept_id>
-  <concept_desc>Computer systems organization~Embedded systems</concept_desc>
-  <concept_significance>500</concept_significance>
- </concept>
- <concept>
-  <concept_id>10010520.10010575.10010755</concept_id>
-  <concept_desc>Computer systems organization~Redundancy</concept_desc>
-  <concept_significance>300</concept_significance>
- </concept>
- <concept>
-  <concept_id>10010520.10010553.10010554</concept_id>
-  <concept_desc>Computer systems organization~Robotics</concept_desc>
-  <concept_significance>100</concept_significance>
- </concept>
- <concept>
-  <concept_id>10003033.10003083.10003095</concept_id>
-  <concept_desc>Networks~Network reliability</concept_desc>
-  <concept_significance>100</concept_significance>
- </concept>
+  <concept>
+    <concept_id>10010520.10010521.10010537</concept_id>
+    <concept_desc>Computer systems organization~Distributed architectures</concept_desc>
+    <concept_significance>500</concept_significance>
+  </concept>
+  <concept>
+    <concept_id>10002951.10002952.10003219.10003215</concept_id>
+    <concept_desc>Information systems~Extraction, transformation and loading</concept_desc>
+    <concept_significance>500</concept_significance>
+  </concept>
+  <concept>
+    <concept_id>10002951.10002952.10003219.10003222</concept_id>
+    <concept_desc>Information systems~Mediators and data integration</concept_desc>
+    <concept_significance>500</concept_significance>
+  </concept>
+  <concept>
+    <concept_id>10002951.10002952.10003219.10003223</concept_id>
+    <concept_desc>Information systems~Entity resolution</concept_desc>
+    <concept_significance>500</concept_significance>
+  </concept>
+  <concept>
+    <concept_id>10002951.10003227.10003351.10003218</concept_id>
+    <concept_desc>Information systems~Data cleaning</concept_desc>
+    <concept_significance>500</concept_significance>
+  </concept>
+  <concept>
+    <concept_id>10002951.10003260.10003309.10003315.10003314</concept_id>
+    <concept_desc>Information systems~Resource Description Framework (RDF)</concept_desc>
+    <concept_significance>500</concept_significance>
+  </concept>
 </ccs2012>
 \end{CCSXML}
 
-\ccsdesc[500]{Computer systems organization~Embedded systems}
-\ccsdesc[300]{Computer systems organization~Redundancy}
-\ccsdesc{Computer systems organization~Robotics}
-\ccsdesc[100]{Networks~Network reliability}
+\ccsdesc[500]{Computer systems organization~Distributed architectures}
+\ccsdesc[500]{Information systems~Extraction, transformation and loading}
+\ccsdesc[500]{Information systems~Mediators and data integration}
+\ccsdesc[500]{Information systems~Entity resolution}
+\ccsdesc[500]{Information systems~Data cleaning}
+\ccsdesc[500]{Information systems~Resource Description Framework (RDF)}
 
 
-\keywords{ACM proceedings, \LaTeX, text tagging}
+\keywords{Big Data Processing, Data Integration, Data Enrichment, Linked Data}
 
 
 \maketitle
@@ -144,19 +158,11 @@ Some initial tests have been carried out on data sets of a TB featuring promisin
 \input{sections/introduction.tex}
 \input{sections/approach.tex}
 \input{sections/architecture.tex}
-\input{sections/evaluation.tex}
-
+%\input{sections/evaluation.tex}
 \input{sections/conclusions.tex}
 
 \begin{acks}
-  The work is
-  supported by the \grantsponsor{GS501100001809}{National Natural
-    Science Foundation of
-    China}{http://dx.doi.org/10.13039/501100001809} under Grant
-  No.:~\grantnum{GS501100001809}{61273304}
-  and~\grantnum[http://www.nnsf.cn/youngscientists]{GS501100001809}{Young
-    Scientists' Support Program}.
-
+The work in this paper is partly supported by the EC funded projects EW-Shopp (Grant number: 732590), 
 \end{acks}
 
 

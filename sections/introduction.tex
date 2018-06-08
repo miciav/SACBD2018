@@ -1,33 +1,25 @@
 \section{Introduction}
 
-EW-Shopp aims to support e-commerce, retail and marketing industries in improving their efficiency and competitiveness through providing the ability to perform predictive and prescriptive analytics over integrated and enriched large data sets through the use of open and flexible solutions. 
-This document is intended to be the first step towards the construction of the EW-Shopp ecosystem, a platform that seeks to significantly reduce integration time and to improve the quality of analytics by providing cutting-edge tools and access to data as a service, with particular reference to weather and event information.  
 
 
-For some years now we have been witnessing the flourishing and reinforcement of Big Data methodologies in academia but especially in industry. 
-This success can be partly explained by the promise of Big Data supporters to define and deliver more accurate and efficient data-driven decision-making processes.
-This is not the only asset, though, but it is what we are most interested in highlighting within the EW-Shopp project. 
-
-The term "Data Analytics" is too often used to define a generic data driven decision process and therefore covers heterogeneous activities such as cleaning, linking, enrichment/extension, training and application of analytic models, up to business intelligence and visualization. 
-In this document, we propose a platform from its components and their relationships. We present a reference architecture obtained from a rigorous process of requirements elicitation that took into account both literature and best practices as well as the needs expressed by involved stakeholders. 
-In that particular document, not only the functional requirements associated with business cases (the implementation and reporting of which in marketed services is one of the core aspects of the project) have been collected and refined, but also the development guidelines based on lean methodology [2] have been defined. In particular, the build-measure-learn feedback loop is also presented. 
-In a nutshell, the methodology envisions for each pilot a starting phase with Minimum Viable Product (MVP) meant to reduce the time-to-market. The MVP is going to be enriched as the project progresses and the vision matures. Pilots are therefore seen as playgrounds for experimenting approaches and technologies that eventually will be included in the final marketed services. 
+Over the past years Big Data has been receiving ever more attention both in academia and industry. 
+%For some years now we have been witnessing the flourishing of Big Data in Academia but especially in Industry. 
+This can be partly explained by the promise of Big Data advocates to create value (estimates indicate yearly earnings in the order of 200 billion dollars by 2020~\cite{idc_analytics}) delivering more accurate and efficient data-driven decision-making processes via analytics. 
+The term \textit{Data Analytics}, however, is vague and too often used to define a class of heterogeneous activities such as \textit{data wrangling}~\cite{furche2016data} (that includes preparation processes as cleaning, linking, enrichment/extension), training and application of analytic models, up to business intelligence and visualization. 
+In this paper, we focus on data wrangling on tabular data, as the correct definition of data preparation processes is a painful and time-consuming (up to the 80\% of total time~\cite{lohr2014big}) hurdle in the implementation of a value-added data driven pipelines.
+In particular, we describe a software solution (part of a larger ecosystem) tailored to perform data wrangling and generation of linked data, which is able to operate on massive data sets with a special support provided to the integration of weather and events data. This platform has been designed and realized following the guidelines of the Lean methodology, based on a rigorous activity of requirements elicitation that took into account both literature and best practices as well as the needs expressed by involved stakeholders. 
 
 
-At the time this document is written, we have designed a unified, complete and well-founded reference architecture. The declared objective is to provide a point of reference that will remain as steady as possible for the entire duration of the project and that can thus lead its evolution on the basis of a solid and agreed basis. 
+%One might wonder about the rationale behind creating a new Big Data solution when the market already offers many widely adopted proprietary and open-source alternatives. 
+%The answer lies in the nature of the operations to carry out on the data. 
+%Most available platforms, in fact, feature a general-purpose processing model designed for users familiar with programming languages and process definition, but usually inexperienced in the particular domain to which the data pertain~\cite{sukhobok2016tabular}. 
+Although there are many solutions for processing Big Data, most available platforms feature a general-purpose processing model designed for users familiar with programming languages and process definition, but usually inexperienced in the particular domain to which the data pertain~\cite{sukhobok2016tabular}. For this reason, they do not provide specific and user-friendly tools for the definition of data preparation pipelines~\cite{rahm2000data} (design time), and, instead, often focus only on the management of their execution (run time). The main implication is the emergence of a two-pronged working environment consisting, on the one hand, of the domain experts in charge of designing data transformations, and, on the other hand, of engineers who deploy them into a production environment. This socio-occupational gap between interdependent groups pigeonholed in strictly separated roles can cause problems and delays in development and maintenance of Big Data solutions and calls for specific solutions to be bridged.  
 
-To do this, as we will see, we started from the functional requirements trying to read in them the answers to the architectural questions that we asked ourselves.  It was immediately evident, however, that these requirements were not sufficient to define a modern, efficient, responsive and scalable platform. As a consortium, we have therefore decided to undertake an in-depth study of the problems that we want to tackle. Some results of such teamwork are detailed here.  
+%The proposed platform for designing and executing data transformation pipelines (from the cleaning phase to linking and publication) is being realized in the context of EW-Shopp. This is a H2020 EU project aiming at supporting the e-commerce, retail and marketing industries in improving their efficiency and competitiveness through enabling them to perform predictive and prescriptive analytics over integrated, enriched, and extended large data sets using open and flexible solutions. 
+This paper describes the architecture of a subsystem of the EW-Shopp\footnote{\url{http://www.ew-shopp.eu/}} integrated platform aimed at facilitating and enhancing data transformation, integration, and extension processes with focus on large scale integration of weather and event information.
 
-With the work the consortium has done on component design, the processes and outcomes of which are described in this document, we aim to achieve the following two objectives:
-\begin{itemize}
-    \item Define a reference architecture. This deliverable provides a reference architecture that aims at being general and flexible enough to be successful applied in the pilots. The architecture describes the core components and their relationships in terms of data flow. Moreover, it aims at setting a common language among the partners. To make this possible, we have referred to the pilot descriptions, the partners’ experience, and the best practices of the field of Big Data. Furthermore, the effort required to define precisely the pilots, especially in terms of processes, data flow and workflow, has spawned awareness in the consortium members about the complexity of the problem and the need of a common reference. Finally, it is important to note that defining a reference architecture does not conflict with the lean methodology as we describe the components according to their general functionality, without imposing specific solutions.
-    \item Propose an initial implementation of the platform. This deliverable also provides an early stage implementation of the reference architecture.
-\end{itemize}
-
-
-This work is structured as follows. 
-In Section \ref{sec:architecture} we present the reference architectures for Big Data as well as the main solutions for data wrangling, data analytics, business intelligence and reporting. 
-The requirements that have guided the definition of our reference architecture are presented and discussed in Section 3. 
+The paper is structured as follows. 
+In Section~\ref{sec:approach} the main design principles that have driven the definition of the overall architecture are presented whereas the architecture, components, and workflow are discussed in Section~\ref{sec:architecture}. %Section~\ref{sec:evaluation} illustrates some preliminary experiments with a large data set.
 Finally, Section~\ref{sec:conclusions} concludes the document. 
 
 
